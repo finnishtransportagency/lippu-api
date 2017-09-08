@@ -1,0 +1,6 @@
+{
+"basePackage":"fi.ficora.lippu",
+"modelPackage":"fi.ficora.lippu.model",
+"configPackage":"fi.ficora.lippu.config",
+"apiPackage":"fi.ficora.lippu.server"
+}

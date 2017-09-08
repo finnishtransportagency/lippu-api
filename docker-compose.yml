@@ -1,0 +1,24 @@
+version: '3'
+
+services:
+
+  swagger:
+    image: swaggerapi/swagger-ui
+    environment:
+    - API_URL=/swagger/yaml/api.yml
+    volumes:
+      - ./yaml:/usr/share/nginx/html/yaml:Z
+
+  stubs:
+    build:
+      context: .
+      dockerfile: Dockerfile-stubs
+    volumes:
+      - ./.docker_m2:/root/.m2:Z
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile-nginx
+    ports:
+      - "80:80"

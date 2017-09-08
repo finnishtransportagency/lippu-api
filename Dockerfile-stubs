@@ -1,0 +1,13 @@
+FROM openjdk:8-jdk-alpine
+
+RUN apk add --update maven wget
+
+RUN mkdir /codegen
+RUN mkdir /stubs
+
+RUN wget http://central.maven.org/maven2/io/swagger/swagger-codegen-cli/2.2.3/swagger-codegen-cli-2.2.3.jar -O /codegen/swagger-codegen-cli.jar
+
+COPY ./yaml/api.yml /codegen/api.yml
+COPY start-stub.sh start-stub.sh
+
+CMD ["./start-stub.sh"]
