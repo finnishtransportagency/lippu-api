@@ -50,7 +50,10 @@ paths:
           $ref: "#/definitions/AccountId"
       responses:
         200:
-          description: "Server side authentication nonce value."
+          description: "Authentication initialization response. Response includes server side nonce value for \
+                        the authentication process."
+          schema:
+            $ref: "#/definitions/AuthenticationInitResponse"
         403:
           description: "Company account does not exists or valid authentication token could not be generated."
         405:
@@ -59,7 +62,7 @@ paths:
     post:
       tags:
       - "login"
-      summary: "Creates valid authentication token"
+      summary: "Creates a valid authentication token"
       description: ""
       operationId: "commitAuth"
       consumes:
@@ -97,7 +100,7 @@ paths:
         200:
           description: "[JWT](https://jwt.io/) authentication token for making authorized requests."
           schema:
-            $ref: "#/definitions/AuthToken"
+            $ref: "#/definitions/AuthenticationResponse"
         403:
           description: "Authentication failed"
         405:
@@ -107,7 +110,7 @@ paths:
     get:
       tags:
       - "availability"
-      summary: "Porduct portfolio for given datetime."
+      summary: "Product portfolio for given datetime."
       description: "Returns product portfolio of transport operator that is valid on given datetime.\
                     As product offerings can change over time, and some products may be seasonal, \
                     the date is always part of the search process. If the search parameter {date} \
@@ -331,6 +334,16 @@ paths:
 
 definitions:
 
+  AuthenticationInitResponse:
+    type: object
+    required:
+      - nonce
+    description: "Response for authentication initialization."
+    properties:
+      nonce:
+        type: string
+        description: "Server side nonce value."
+
   AuthenticationRequest:
     type: object
     required:
@@ -356,6 +369,16 @@ definitions:
         enum:
         - RSA+SHA256
         - ECDSA
+
+  AuthenticationResponse:
+    type: object
+    required:
+      - token
+    description: "The authentication token for a successful authentication."
+    properties:
+      token:
+        type: string
+        description: "JWT based authentication token"
 
   ProductQueryResponse:
     type: object
@@ -586,9 +609,6 @@ definitions:
     properties:
       account:
         type: string
-
-  AuthToken:
-    type: string
 
   CustomerInfo:
     type: object
