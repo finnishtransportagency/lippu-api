@@ -139,12 +139,6 @@ paths:
           description: "Text indentification of original requestor. Value is use for error situations."
 
         - in: header
-          name: X-Initiator
-          type: string
-          required: true
-          description: "Text indentification of original requestor. Value is use for error situations."
-
-        - in: header
           name: Authorization
           type: string
           required: true
@@ -153,7 +147,7 @@ paths:
         - in: path
           name: date
           description: "Datetime value when returned product portfolio is valid. If date is not given, current datetime is used."
-          required: false
+          required: true
           type: string
           format: "date-time"
 
@@ -759,6 +753,9 @@ definitions:
       - productType
       - dateTime
     properties:
+      contract:
+        type: string
+        description: "Contract identifier"
       productType:
         type: string
         description: "Availability/Product kyselyn vastauksena tulleen tuotteen tunnus."

@@ -2,5 +2,7 @@
 "basePackage":"fi.ficora.lippu",
 "modelPackage":"fi.ficora.lippu.model",
 "configPackage":"fi.ficora.lippu.config",
-"apiPackage":"fi.ficora.lippu.server"
+"apiPackage":"fi.ficora.lippu.server",
+"java8" : "true",
+"title" : "Lippu"
 }
