@@ -1,8 +1,8 @@
 {
 "basePackage":"fi.ficora.lippu",
-"modelPackage":"fi.ficora.lippu.model",
+"modelPackage":"fi.ficora.lippu.domain.model",
 "configPackage":"fi.ficora.lippu.config",
-"apiPackage":"fi.ficora.lippu.server",
+"apiPackage":"fi.ficora.lippu.controller",
 "java8" : "true",
 "title" : "Lippu"
 }

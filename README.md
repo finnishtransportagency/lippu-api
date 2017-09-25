@@ -1,71 +1,70 @@
-# Lippu-projektin API -määritykset
+# LIPPU-project API -definitions
 
-Tämä repository sisältää Lippu-projektin API-määritykset Swagger 2.0 yaml -muodossa. Voit luoda itsellesi ympäristön, 
-missä voit niitä katsoa omalla koneellasi käyttäen Dockeria
+This repository has the LIPPU-project API-definitions in Swagger 2.0 yaml-format.
+You can build a Docker-environment to view the API-definitions
+or you can open the `yaml/api.yml` file in [Swagger-editor](https://github.com/swagger-api/swagger-editor).
 
-Käynnistääksesi Swaggerin lokaalisti aja seuraava komento komentorivillä (Docker pitää olla asennettuna):
+To run the Swagger Docker container in local environment, run the following command (you must
+have Docker and Docker compose installed):
 
 ```
 docker-compose up
 ```
-Jos Dockerin käynnistyksen yhteydessä tulee herjaa siitä, että palomuuri estää volume-jaot (ongelma Windowsissa 
-ennenkaikkea), niin sinun tulee tehdä aukko Dockerille palomuuriisi. 
-[Katso ohjeet Dockerin dokumentaatiosta](https://docs.docker.com/docker-for-windows/#firewall-rules-for-shared-drives).
+If Docker throws an error about firewall blocking volume shares (common problem in the Windows
+environment), you must open ports for Docker in the firewall. 
+[See Docker's documentation for instructions](https://docs.docker.com/docker-for-windows/#firewall-rules-for-shared-drives).
 
-Komennon suorittamiseen menee ensimmäisellä kerralla hetki, joten malta mielesi :)
+It takes a while to build the containers and start them, so be patient :)
 
-Tämän jälkeen voit vain avata selaimeesi [http://localhost](http://localhost) nähdäksesi dokumentaation. Tavallinen 
-`ctrl+c` sammuttaa Docker-kontit.
+After the containers have started, open a browser and point it to the [http://localhost](http://localhost) address
+to see the documentation. You can terminate the containers with `ctrl+c`.
 
-## Mitä käynnistyy?
+## What's in the containers?
 
-Kun `docker-compose up` ajetaan niin tällöin tehdään seuraavaa:
+When the `docker-compose up` command is executed, the following will happen
 
-1. Luodaan Swagger UI -kontti, joka näkee suoraan `yaml/api.yml` -tiedoston ja täten kyseisen tiedoston muokkaukset
-   lokaalisti näkyvät suoraan Swagger UI:ssa kunhan tekee sivun uudelleenlatauksen.
-2. Luodaan toinen kontti, johon luodaan imagen luontihetkellä `yaml/api.yml` -tiedoston mukainen palvelin-stub, joka
-   käynnistetään kontin käynnistyshetkellä. Tämä stub-toteutus ei päivity automaattisesti ilman docker-imagen 
-   uudelleenluomista (ks. alla)
-3. Käynnistetään Nginx-palvelin, joka toimii proxy forwardina näiden kahden aikaisemman kontin välillä ja tarjoaa
-   niille yhteisen hostin, jonka avulla niihin pääsee käsiksi suoraan kehittäjän omalta koneelta.
+1. A Swagger UI container is created, which sees the `yaml/api.yml`-file. Making a page reload will
+   update the UI with the changes to the API-definitions. 
+2. Another container is created, which has a stub implementation of the API. When the container is created, the code
+   is generated from the `yaml/api.yml` file. The stub implementation will not update
+   without restarting the container (see below). 
+3. A Nginx-server is started, which acts as a forward-proxy for the previous two containers and provides them
+   the same hostname, so you can access both containers from the developers machine.
+  
    
-## Kehitys
+## Development
 
-### Koodigenerointi
+### Code generation
 
-LIPPU-rajapinnan käyttämiseksi on mahdollista luoda valmiit koodipohjat Swagger codegen-työkalulla. Koodit ja ohjeistus löytyvät Githubin [swagger-codegen](https://github.com/swagger-api/swagger-codegen) projektista. 
+You can use Swagger codegen-tool to build stub implementation for LIPPU API. The code and the documentation is available
+in the [swagger-codegen](https://github.com/swagger-api/swagger-codegen) Github-project and some examples
+are in the [codegen README](codegen/README.md)-file. 
 
-Tuettuja kieliä mm. 
-```
-akka-scala, android, apache2, apex, aspnet5, aspnetcore, async-scala, bash, csharp, clojure, cwiki, cpprest, CsharpDotNet2, dart, elixir, eiffel, erlang-server, finch, flash, python-flask, go, go-server, groovy, haskell, jmeter, jaxrs-cxf-client, jaxrs-cxf, java, inflector, jaxrs-cxf-cdi, jaxrs-spec, jaxrs, msf4j, java-play-framework, jaxrs-resteasy-eap, jaxrs-resteasy, javascript, javascript-closure-angular, java-vertx, kotlin, lumen, nancyfx, nodejs-server, objc, perl, php, php-symfony, powershell, pistache-server, python, qt5cpp, rails5, restbed, ruby, scala, scalatra, silex-PHP, sinatra, slim, spring, dynamic-html, html2, html, swagger, swagger-yaml, swift4, swift3, swift, tizen, typescript-angular2, typescript-angular, typescript-fetch, typescript-jquery, typescript-node, undertow, ze-ph
-``` 
-
-Esim. clojure client-stubit LIPPU-rajapinnan käyttämiseksi generoituu komennolla
-```
-git clone https://github.com/swagger-api/swagger-codegen
-cd swagger-codegen
-mvn clean package
-java -jar modules/swagger-codegen-cli/target/swagger-codegen-cli.jar generate -i ../swagger-api-doc/yaml/api.yml -l clojure -o /var/tmp/lippu-clojure-client
-```
 
 ### Swagger Docker
-Mikäli haluat jatkokehittää tätä kokonaisuutta, niin on suositeltavaa käynnistää docker-compose käskyllä:
+If you want to develop the API, it is recommended to start the Docker containers with the following
+docker-compose command:
 
 ```
 docker-compose up --build
 ```
 
-jolloin Docker kääntää muuttuneet imaget käynnistyksen yhteydessä. Stub-imagen maven-riippuvuudet on jaettu
-emokäyttiksen kanssa volume-direktiivillä jotta ne eivät päätyisi osaksi konttia ja täten asioiden muuttuessa ei
-kaikkia riippuvuuksia jouduttaisi hakemaan joka kerta uudestaan ja uudestaan. Nämä Docker-konttien käyttämät
-riippuvuudet tallennetaan hakemistoon `./.docker_m2/`. Täten ensimmäisen kerran jälkeen stub-imagen luonti on nopeaa
-ja sen käynnistyksen yhteydessä generoidaan uudet koodit, käännetään ne mavenilla ja käynnistetään palvelin. Tässä
-menee luonnollisesti hetki, mutta puhutaan kuitenkin muutamista sekunneista eikä minuuteista.
+This will trigger Docker to rebuild images that have changes. The maven dependencies
+used by the stub image are shared with the host OS using volume-directivies. This 
+way dependencies wont end up being part of the container and they are not
+fetched everytime the container is built. These dependencies are stored in `./.docker_m2/`
+directory. Building the containers for the first time takes time due
+to the dependencies, but is faster the following times. When started,
+the process will generate new stub implementation codes based on the
+API-definitions, compile the code with maven and start the application
+server.
 
-## Tulevaisuus
+## Future
 
-Tulevaisuudessa sama `docker-compose up` -komento voisi käynnistää oikean referenssitoteutuksen palvelimesta. Käytännössä
-tämä tarkoittaa sitä, että stub-palvelin korvataan tällä referenssitoteutuksella. Tässä kohden tosin kannattaa harkita
-vakavasti sitä, että onko mielekästä pitää swagger UI -kontti erillään referenssitoteutuksesta - yhtä hyvin tämän
-Swagger UI:n voisi tarjoilla sieltä referenssitoteutuksesta itsestään ulos. Oikeaa referenssitoteutusta kun ei voi 
-generoida automaattisesti kuitenkaan.
+In the future the `docker-compose up` command could start a reference implementation
+of the API instead of the generated stub implementation. It could also replace the whole
+Swagger UI container, as the reference implementation could provide the Swagger UI for the API.
+
+## License
+This work is licended under EUPL (European Union Public Licence) version 1.2. See [LICENSE.txt](LICENSE.txt)
+for more information.
