@@ -12,7 +12,12 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 - Response types for authentication requests.
 - Server side nonce to AuthenticationRequest to allow multiple nonces for a user. 
 
+
 ### Changed
+- Combined StopLocation and CoordinateLocation to Location object as Swagger 2.0
+  does not support oneOf-structures
+- Error responses to return JSON formatted responses (ApiError object).
+- ReservationDelete operation to return RervervationDeleteResponse-object.
 - Title and java8 attributes to spring codegen options.
 - Changed default package names for spring codegen options.
 - Translated the README to english.

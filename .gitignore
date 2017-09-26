@@ -1,2 +1,3 @@
 .idea
 .docker_m2/repository
+*.iml

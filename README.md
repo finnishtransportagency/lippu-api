@@ -10,6 +10,8 @@ have Docker and Docker compose installed):
 ```
 docker-compose up
 ```
+If you have used previously Swagger-UI docker image, be sure to use
+recent enough Docker image that have fixes for composed classes. 
 If Docker throws an error about firewall blocking volume shares (common problem in the Windows
 environment), you must open ports for Docker in the firewall. 
 [See Docker's documentation for instructions](https://docs.docker.com/docker-for-windows/#firewall-rules-for-shared-drives).
