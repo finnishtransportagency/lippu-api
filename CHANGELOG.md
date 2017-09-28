@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 ### Added
+- Accessibility class.
+- TravelPassenger class.
 - Changelog.
 - License (EUPL v1.2) and LICENSE.txt
 - Separate README for code generation.
@@ -14,6 +16,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 
 ### Changed
+- Added ExtraServices and Accessibility options to products and availability
+  queries. If user want those options most probably the user would like
+  to query with those options and tie those to the certain passenger.
+  Also those are needed in needed in the availability query to check if
+  the transport service can capasity to offer the service.   
 - Combined StopLocation and CoordinateLocation to Location object as Swagger 2.0
   does not support oneOf-structures
 - Error responses to return JSON formatted responses (ApiError object).
