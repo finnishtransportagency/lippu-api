@@ -881,7 +881,7 @@ definitions:
           - UNACCOMPANIED_MINOR_ASSISTANCE
           - OTHER
           - STEP_FREE_ACCESS
-          - UNKOWN
+          - UNKNOWN
       additionalInformation:
         type: string
       description:
