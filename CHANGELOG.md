@@ -5,9 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 ### Added
+- Added separate docs-folder for documentation, moved documentation there.
+- Added security consideration document for API implementors.
 - Changelog.
 - License (EUPL v1.2) and LICENSE.txt
-- Separate README for code generation.
+- Separate Codegeneration.md document for generating code from API definition. 
 - From and to coordinates to products query.
 - Response types for authentication requests.
 - Server side nonce to AuthenticationRequest to allow multiple nonces for a user. 

@@ -4,6 +4,11 @@ This repository has the LIPPU-project API-definitions in Swagger 2.0 yaml-format
 You can build a Docker-environment to view the API-definitions
 or you can open the `yaml/api.yml` file in [Swagger-editor](https://github.com/swagger-api/swagger-editor).
 
+## Documentation
+Main documentation is located in the [docs](docs/Index.md)-folder.
+
+## Starting containers
+
 To run the Swagger Docker container in local environment, run the following command (you must
 have Docker and Docker compose installed):
 
@@ -40,7 +45,7 @@ When the `docker-compose up` command is executed, the following will happen
 
 You can use Swagger codegen-tool to build stub implementation for LIPPU API. The code and the documentation is available
 in the [swagger-codegen](https://github.com/swagger-api/swagger-codegen) Github-project and some examples
-are in the [codegen README](codegen/README.md)-file. 
+are in the [code generation section of the documents](docs/Codegeneration.md)-file. 
 
 
 ### Swagger Docker
