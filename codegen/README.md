@@ -18,7 +18,7 @@ need to correct file paths.
 git clone https://github.com/swagger-api/swagger-codegen
 cd swagger-codegen
 mvn clean package
-java -jar modules/swagger-codegen-cli/target/swagger-codegen-cli.jar generate -c ../swagger-api-doc/codegen/springCodegenOptions.json -i ../swagger-api-doc/yaml/api.yml -l spring -o /var/tmp/lippu-spring-client
+java -jar modules/swagger-codegen-cli/target/swagger-codegen-cli.jar generate -c ../lippu-api/codegen/springCodegenOptions.json -i ../lippu-api/yaml/api.yml -l spring -o /var/tmp/lippu-spring-client
 ```
 
 ## Clojure client example
@@ -29,5 +29,5 @@ need to correct file paths.
 git clone https://github.com/swagger-api/swagger-codegen
 cd swagger-codegen
 mvn clean package
-java -jar modules/swagger-codegen-cli/target/swagger-codegen-cli.jar generate -i ../swagger-api-doc/yaml/api.yml -l clojure -o /var/tmp/lippu-clojure-client
+java -jar modules/swagger-codegen-cli/target/swagger-codegen-cli.jar generate -i ../lippu-api/yaml/api.yml -l clojure -o /var/tmp/lippu-clojure-client
 ```
