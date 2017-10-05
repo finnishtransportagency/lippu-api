@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 ### Added
+- Accessibility query option for the products query, so required accessibility
+  options can be used to filter out products that are not suitable for the
+  customer.
 - Accessibility class.
 - TravelPassenger class.
 - Changelog.

@@ -191,6 +191,25 @@ paths:
           required: false
           description: Longitude part of a coordinate to narrow products query to a certain location.
 
+        - in: query
+          name: accessibility
+          type: array
+          format: string
+          required: false
+          items:
+            type: string
+            enum:
+              - WHEELCHAIR
+              - PUSHCHAIR
+              - PASSENGER_CART
+              - LOW-FLOOR
+              - GUIDE_DOG
+              - ONBOARD_ASSISTANCE
+              - BOARDING_ASSISTANCE
+              - UNACCOMPANIED_MINOR_ASSISTANCE
+              - STEP_FREE_ACCESS
+          description: List of required accessibility options for the product.
+
       responses:
         200:
           description: "Returns product portfolio and supported passenger types for provided products."
