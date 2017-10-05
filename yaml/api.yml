@@ -191,6 +191,25 @@ paths:
           required: false
           description: Longitude part of a coordinate to narrow products query to a certain location.
 
+        - in: query
+          name: accessibility
+          type: array
+          format: string
+          required: false
+          items:
+            type: string
+            enum:
+              - WHEELCHAIR
+              - PUSHCHAIR
+              - PASSENGER_CART
+              - LOW-FLOOR
+              - GUIDE_DOG
+              - ONBOARD_ASSISTANCE
+              - BOARDING_ASSISTANCE
+              - UNACCOMPANIED_MINOR_ASSISTANCE
+              - STEP_FREE_ACCESS
+          description: List of required accessibility options for the product.
+
       responses:
         200:
           description: "Returns product portfolio and supported passenger types for provided products."
@@ -486,6 +505,19 @@ definitions:
           validTo: "2018-08-23T07:04:00.000Z"
           suitablePassengerCategories: ["Adult", "Youth"]
         passengerCategories: ["Adult", "Child", "Youth", "Senior"]
+        extraServices:
+          - title: "Lastenistuin"
+            description: "Erillinen lasten turvaistuin matkalle"
+            extraServiceReservationData: "EXTRA-CHILD-SEAT-115311"
+            fare:
+              currency: "EUR"
+              amount: 4
+              vatPercent: 10
+        accessibility:
+          - title: "LOW-FLOOR"
+            description: "Matalalattia ajoneuvo"
+          - title: "PUSHCHAIR"
+            description: "Paikkoja lastenvaunulle"
 
   AvailabilityRequest:
     type: object
@@ -498,7 +530,7 @@ definitions:
       passengers:
         type: array
         items:
-          type: string
+          $ref: "#/definitions/TravelPassenger"
     example:
       - contract: "CONTRACT-AB123CD"
         travel:
@@ -511,7 +543,18 @@ definitions:
           to:
             id: "MATKA:181342"
             description: "Lahti Matkakeskus C"
-        passengers: ["Adult", "Adult", "Child"]
+        passengers:
+          - category: Adult
+          - category: Adult
+          - category: Child
+            extraServices:
+              - title: "Lastenistuin"
+                description: "Erillinen lasten turvaistuin matkalle"
+                extraServiceReservationData: "EXTRA-CHILD-SEAT-115311"
+                fare:
+                  currency: "EUR"
+                  amount: 4
+                  vatPercent: 10
 
 
   AvailabilityResponse:
@@ -554,7 +597,8 @@ definitions:
               operator: "Liikennöitsijä OY AB (Y-1234567)"
               vehicleInfo: "Linja-auto Mikkeli-Lahti"
               seatInfo: "Istumapaikka 45"
-            applicableForPassengers: ["Adult"]
+            applicableForPassengers:
+              - category: "Adult"
           - reservationData: "XXXXXXXXIFsNCiAgICB7DQogICAgICAidHJhdmVsVHlwZSI6ICJDb29yZGluYXRlQmFzZWRUcmF2ZWwiLA0KICAgICAgImZyb20iOiB7DQogICAgICAgICJsYXQiOiA2MC4yLA0KICAgICAgICAibG9uIjogMjQuOCwNCiAgICAgICAgImRlc2NyaXB0aW9uIjogIkthdXB1bmdpbnRhbG8sIExhaHRpIg0KICAgICAgfSwNCiAgICAgICJ0byI6IHsNCiAgICAgICAgImxhdCI6IDYxLjQsDQogICAgICAgICJsb24iOiAyMC40LA0KICAgICAgICAiZGVzY3JpcHRpb24iOiAiSGVpbm9sYSINCiAgICAgIH0sDQogICAgICAicHJvZHVjdFR5cGUiOiAiUFJPRFVDVC1TSU5HTEUtVElDS0VUIiwNCiAgICAgICJkYXRlVGltZSI6ICIyMDE3LTA4LTIzVDA3OjIwOjA0LjQ3NFoiDQogICAgfQ=="
             validTo: "2017-08-22T13:04:04.534Z"
             fare:
@@ -565,7 +609,8 @@ definitions:
               operator: "Liikennöitsijä OY AB (Y-1234567)"
               vehicleInfo: "Linja-auto Mikkeli-Lahti"
               seatInfo: "Istumapaikka 46"
-            applicableForPassengers: ["Adult"]
+            applicableForPassengers:
+              - category: "Adult"
           - reservationData: "YYYYYYYYYIFsNCiAgICB7DQogICAgICAidHJhdmVsVHlwZSI6ICJDb29yZGluYXRlQmFzZWRUcmF2ZWwiLA0KICAgICAgImZyb20iOiB7DQogICAgICAgICJsYXQiOiA2MC4yLA0KICAgICAgICAibG9uIjogMjQuOCwNCiAgICAgICAgImRlc2NyaXB0aW9uIjogIkthdXB1bmdpbnRhbG8sIExhaHRpIg0KICAgICAgfSwNCiAgICAgICJ0byI6IHsNCiAgICAgICAgImxhdCI6IDYxLjQsDQogICAgICAgICJsb24iOiAyMC40LA0KICAgICAgICAiZGVzY3JpcHRpb24iOiAiSGVpbm9sYSINCiAgICAgIH0sDQogICAgICAicHJvZHVjdFR5cGUiOiAiUFJPRFVDVC1TSU5HTEUtVElDS0VUIiwNCiAgICAgICJkYXRlVGltZSI6ICIyMDE3LTA4LTIzVDA3OjIwOjA0LjQ3NFoiDQogICAgfQ=="
             validTo: "2017-08-22T13:04:04.534Z"
             fare:
@@ -576,15 +621,18 @@ definitions:
               operator: "Liikennöitsijä OY AB (Y-1234567)"
               vehicleInfo: "Linja-auto Mikkeli-Lahti"
               seatInfo: "Istumapaikka 47"
-            applicableForPassengers: ["Child"]
-            extraServices:
-              - title: "Lastenistuin"
-                description: "Erillinen lasten turvaistuin matkalle"
-                extraServiceReservationData: "EXTRA-CHILD-SEAT-115311"
-                fare:
-                  currency: "EUR"
-                  amount: 4
-                  vatPercent: 10
+            applicableForPassengers:
+              - category: "Adult"
+                extraServices:
+                - title: "Lastenistuin"
+                  description: "Erillinen lasten turvaistuin matkalle"
+                  extraServiceReservationData: "EXTRA-CHILD-SEAT-115311"
+                  fare:
+                    currency: "EUR"
+                    amount: 4
+                    vatPercent: 10
+
+
 
   ReservationRequest:
     type: object
@@ -740,6 +788,14 @@ definitions:
         type: string
         format: "date-time"
         description: "End datetime of product validity. If value is not given, product is valid indefinitely."
+      extraServices:
+        type: array
+        items:
+          $ref: "#/definitions/ExtraService"
+      accessibility:
+        type: array
+        items:
+          $ref: "#/definitions/Accessibility"
       from:
         $ref: '#/definitions/CoordinateLocation'
       to:
@@ -780,6 +836,22 @@ definitions:
         format: int32
         description: "VAT percentage of offered service."
 
+  TravelPassenger:
+    type: object
+    required:
+      - category
+    properties:
+      category:
+        type: string
+      extraServices:
+        type: array
+        items:
+          $ref: "#/definitions/ExtraService"
+      accessibility:
+        type: array
+        items:
+          $ref: "#/definitions/Accessibility"
+
   TravelAvailability:
     type: object
     required:
@@ -787,7 +859,6 @@ definitions:
       - validTo
       - transport
       - applicableForPassengers
-      - extraServices
     allOf:
       - type: object
         properties:
@@ -810,14 +881,36 @@ definitions:
             type: array
             description: "Reference to passenger categories given in availability request."
             items:
-              type: string
-          extraServices:
-            type: array
-            items:
-              $ref: "#/definitions/ExtraService"
+              $ref: "#/definitions/TravelPassenger"
+  Accessibility:
+    type: object
+    required:
+      - title
+    properties:
+      title:
+        type: string
+        enum:
+          - WHEELCHAIR
+          - PUSHCHAIR
+          - PASSENGER_CART
+          - LOW-FLOOR
+          - GUIDE_DOG
+          - ONBOARD_ASSISTANCE
+          - BOARDING_ASSISTANCE
+          - UNACCOMPANIED_MINOR_ASSISTANCE
+          - OTHER
+          - STEP_FREE_ACCESS
+          - UNKNOWN
+      additionalInformation:
+        type: string
+      description:
+        type: string
+      fare:
+        $ref: "#/definitions/ProductFare"
 
   ExtraService:
     type: object
+    description: Extra services for passenger, like transporting animal.
     required:
       - title
       - extraServiceReservationData
@@ -825,18 +918,10 @@ definitions:
     properties:
       title:
         type: string
-      description:
-        type: string
       extraServiceReservationData:
         type: string
-        description: "Reservation information produced by transportation service. Content of the information \
-                      enables transportation service to individually form information of a additional service, so \
-                      that it can be bundled to a certain offered travel right. It is not necessary to bundle all \
-                      additional services (i.e. child seat in for a taxi fair), but for some (i.e. a meal on a \
-                      flight). How specifically is the additional information bundled is left to the transportation \
-                      services responsibility. The calling party should not have to concern about it, their duty is \
-                      to forward the value of the field as is when order is submitted if an additional service is \
-                      included in the order."
+      description:
+        type: string
       fare:
         $ref: "#/definitions/ProductFare"
 
