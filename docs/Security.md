@@ -1,4 +1,4 @@
-#Security Considerations
+# Security Considerations
 This documentation outlines security considerations that
 API implementors should take into account when designing
 and implementing the Lippu-API.
