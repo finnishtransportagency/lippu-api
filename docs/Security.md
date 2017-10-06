@@ -3,6 +3,19 @@ This documentation outlines security considerations that
 API implementors should take into account when designing
 and implementing the Lippu-API.
 
+## Threat modeling
+Threat modelling is a good practise to approach security for
+a software application. In threat modelling, you try to identity,
+quantify and address security risks of the application. In short
+the aim is to identify and mitigate risks that have high probability
+or have severe consequences. There are different guides
+available for threat modeling, one is the [Application Threat Modeling](https://www.owasp.org/index.php/Application_Threat_Modeling)
+by the [Open Web Application Security Project (OWASP)](https://www.owasp.org/). 
+There is also an ongoing project to translate the guide to
+Finnish at Github: [Uhka-analyysi](https://github.com/solita/uhka-analyysi).
+It is suggested to incorporate threat modelling practises into
+the software development process. 
+
 ## HTTP considerations
 The Lippu-API is built on top of HTTP-protocol, all
 the security considerations of the HTTP-protocol
@@ -52,8 +65,7 @@ be places on application logging and prevent logging of sensitive
 information to the application logs.
 
 ## Common web application vulnerabilities
-The [Open Web Application Security Project (OWASP)](https://www.owasp.org/) maintains a list
-of [most used vulnerability categories](https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project).
+OWASP maintains a list of [most used vulnerability categories](https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project).
 Implementors should go the through the list of the vulnerability categories
 and try mitigate and prepare to the relevant vulnerability categories.
 There is a separate [cheat sheet](https://www.owasp.org/index.php/OWASP_Top_Ten_Cheat_Sheet)
