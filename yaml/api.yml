@@ -497,6 +497,20 @@ definitions:
           validFrom: "2017-08-22T07:20:04.474Z"
           validTo: "2018-08-23T07:20:04.474Z"
           suitablePassengerCategories: ["Adult", "Child", "Youth", "Senior"]
+          extraServices:
+            - title: "Childseat"
+              description: "Separate child safety seat for the travel."
+              extraServiceReservationData: "EXTRA-CHILD-SEAT-115311"
+              fare:
+                currency: "EUR"
+                amount: 4
+                vatPercent: 10
+          accessibility:
+            - title: "LOW-FLOOR"
+              description: "Low-floor vechile."
+            - title: "PUSHCHAIR"
+              description: "Separte space for pushchairs."
+
         - productType: "PRODUCT-SEASON-TICKET"
           contract: "CONTRACT-AB123CD"
           name: "Season ticket"
@@ -504,20 +518,9 @@ definitions:
           validFrom: "2017-08-22T07:00:00.000Z"
           validTo: "2018-08-23T07:04:00.000Z"
           suitablePassengerCategories: ["Adult", "Youth"]
+          accessibility:
+            - title: "UNKNOWN"
         passengerCategories: ["Adult", "Child", "Youth", "Senior"]
-        extraServices:
-          - title: "Lastenistuin"
-            description: "Erillinen lasten turvaistuin matkalle"
-            extraServiceReservationData: "EXTRA-CHILD-SEAT-115311"
-            fare:
-              currency: "EUR"
-              amount: 4
-              vatPercent: 10
-        accessibility:
-          - title: "LOW-FLOOR"
-            description: "Matalalattia ajoneuvo"
-          - title: "PUSHCHAIR"
-            description: "Paikkoja lastenvaunulle"
 
   AvailabilityRequest:
     type: object
@@ -548,8 +551,8 @@ definitions:
           - category: Adult
           - category: Child
             extraServices:
-              - title: "Lastenistuin"
-                description: "Erillinen lasten turvaistuin matkalle"
+              - title: "Childseat"
+                description: "Separate child safety seat for the travel."
                 extraServiceReservationData: "EXTRA-CHILD-SEAT-115311"
                 fare:
                   currency: "EUR"
@@ -584,7 +587,7 @@ definitions:
             description: "Kauppatori, Mikkeli"
           to:
             id: "MATKA:181342"
-            platform: "Laituri 7"
+            platform: "Platform 7"
             description: "Lahti Matkakeskus C"
         availability:
           - reservationData: "InRyYXZlbCI6IFsNCiAgICB7DQogICAgICAidHJhdmVsVHlwZSI6ICJDb29yZGluYXRlQmFzZWRUcmF2ZWwiLA0KICAgICAgImZyb20iOiB7DQogICAgICAgICJsYXQiOiA2MC4yLA0KICAgICAgICAibG9uIjogMjQuOCwNCiAgICAgICAgImRlc2NyaXB0aW9uIjogIkthdXB1bmdpbnRhbG8sIExhaHRpIg0KICAgICAgfSwNCiAgICAgICJ0byI6IHsNCiAgICAgICAgImxhdCI6IDYxLjQsDQogICAgICAgICJsb24iOiAyMC40LA0KICAgICAgICAiZGVzY3JpcHRpb24iOiAiSGVpbm9sYSINCiAgICAgIH0sDQogICAgICAicHJvZHVjdFR5cGUiOiAiUFJPRFVDVC1TSU5HTEUtVElDS0VUIiwNCiAgICAgICJkYXRlVGltZSI6ICIyMDE3LTA4LTIzVDA3OjIwOjA0LjQ3NFoiDQogICAgfQ=="
@@ -595,8 +598,8 @@ definitions:
               vatPercent: 10
             transport:
               operator: "Liikennöitsijä OY AB (Y-1234567)"
-              vehicleInfo: "Linja-auto Mikkeli-Lahti"
-              seatInfo: "Istumapaikka 45"
+              vehicleInfo: "Coach Mikkeli-Lahti"
+              seatInfo: "Seat number 45"
             applicableForPassengers:
               - category: "Adult"
           - reservationData: "XXXXXXXXIFsNCiAgICB7DQogICAgICAidHJhdmVsVHlwZSI6ICJDb29yZGluYXRlQmFzZWRUcmF2ZWwiLA0KICAgICAgImZyb20iOiB7DQogICAgICAgICJsYXQiOiA2MC4yLA0KICAgICAgICAibG9uIjogMjQuOCwNCiAgICAgICAgImRlc2NyaXB0aW9uIjogIkthdXB1bmdpbnRhbG8sIExhaHRpIg0KICAgICAgfSwNCiAgICAgICJ0byI6IHsNCiAgICAgICAgImxhdCI6IDYxLjQsDQogICAgICAgICJsb24iOiAyMC40LA0KICAgICAgICAiZGVzY3JpcHRpb24iOiAiSGVpbm9sYSINCiAgICAgIH0sDQogICAgICAicHJvZHVjdFR5cGUiOiAiUFJPRFVDVC1TSU5HTEUtVElDS0VUIiwNCiAgICAgICJkYXRlVGltZSI6ICIyMDE3LTA4LTIzVDA3OjIwOjA0LjQ3NFoiDQogICAgfQ=="
@@ -607,8 +610,8 @@ definitions:
               vatPercent: 10
             transport:
               operator: "Liikennöitsijä OY AB (Y-1234567)"
-              vehicleInfo: "Linja-auto Mikkeli-Lahti"
-              seatInfo: "Istumapaikka 46"
+              vehicleInfo: "Coach Mikkeli-Lahti"
+              seatInfo: "Seat number 46"
             applicableForPassengers:
               - category: "Adult"
           - reservationData: "YYYYYYYYYIFsNCiAgICB7DQogICAgICAidHJhdmVsVHlwZSI6ICJDb29yZGluYXRlQmFzZWRUcmF2ZWwiLA0KICAgICAgImZyb20iOiB7DQogICAgICAgICJsYXQiOiA2MC4yLA0KICAgICAgICAibG9uIjogMjQuOCwNCiAgICAgICAgImRlc2NyaXB0aW9uIjogIkthdXB1bmdpbnRhbG8sIExhaHRpIg0KICAgICAgfSwNCiAgICAgICJ0byI6IHsNCiAgICAgICAgImxhdCI6IDYxLjQsDQogICAgICAgICJsb24iOiAyMC40LA0KICAgICAgICAiZGVzY3JpcHRpb24iOiAiSGVpbm9sYSINCiAgICAgIH0sDQogICAgICAicHJvZHVjdFR5cGUiOiAiUFJPRFVDVC1TSU5HTEUtVElDS0VUIiwNCiAgICAgICJkYXRlVGltZSI6ICIyMDE3LTA4LTIzVDA3OjIwOjA0LjQ3NFoiDQogICAgfQ=="
@@ -619,13 +622,13 @@ definitions:
               vatPercent: 10
             transport:
               operator: "Liikennöitsijä OY AB (Y-1234567)"
-              vehicleInfo: "Linja-auto Mikkeli-Lahti"
-              seatInfo: "Istumapaikka 47"
+              vehicleInfo: "Coach Mikkeli-Lahti"
+              seatInfo: "Seat number 47"
             applicableForPassengers:
               - category: "Adult"
                 extraServices:
-                - title: "Lastenistuin"
-                  description: "Erillinen lasten turvaistuin matkalle"
+                - title: "Childseat"
+                  description: "Separate child safety seat for the travel."
                   extraServiceReservationData: "EXTRA-CHILD-SEAT-115311"
                   fare:
                     currency: "EUR"
