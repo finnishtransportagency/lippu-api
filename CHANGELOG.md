@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased]
+## [0.2.0] - 6.10.2017
 ### Added
 - Separate docs-folder for documentation, moved documentation there.
 - Security considerations document for API implementors.
