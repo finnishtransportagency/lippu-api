@@ -1,0 +1,26 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+
+skinparam sequence {
+	ArrowColor DeepSkyBlue
+	ActorBorderColor DeepSkyBlue
+	LifeLineBorderColor blue
+	LifeLineBackgroundColor #A9DCDF
+
+	ParticipantBorderColor DeepSkyBlue
+	ParticipantBackgroundColor DodgerBlue
+	ParticipantFontName Impact
+	ParticipantFontSize 17
+	ParticipantFontColor #FFFFFF
+
+	ActorBackgroundColor aqua
+	ActorFontColor DeepSkyBlue
+	ActorFontSize 17
+	ActorFontName Aapex
+}
+Client -> Server: AuthenticationInitRequest (account)
+Server --> Client: AuthenticationInitResponse (\n  snonce,\n  user,\n  expires)
+
+Client -> Server: AuthenticationRequest (\n  data,\n  cnonce,\n  snonce,\n  alg,\n  pubKeyId)
+Server --> Client: AuthenticationResponse (\n  auth token,\n  user,\n  expires)
+@enduml
