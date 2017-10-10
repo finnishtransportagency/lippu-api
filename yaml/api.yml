@@ -3,7 +3,7 @@ info:
   description: "Transport Code broughts together legal provisions on transport market under one act. \
                 The LIPPU-project was created to help transport operators enable Mobility as a Service (MaaS) capabilities. \
                 This is API specification of LIPPU-project. NOTE, the ticket payment capabilities are scoped out from LIPPU-project."
-  version: "0.2.0"
+  version: "0.3.0-SNAPSHOT"
   title: "Lippu"
   license:
     name: EUPL v1.2
