@@ -43,7 +43,8 @@ The ticket reservation is three part process:
 All the querys require authentication token from the
 authentication flow. The token is sent in a http header.
 The sequence diagram for the ticket reservation
-flow is below. 
+flow is below.
+
 ![Reservation flow sequence](uml/reservation_flow.png "Reservation flow sequence")
 
 ### Product query
