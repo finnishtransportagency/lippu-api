@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
+### Added
+- travelEntitlement endpoint for status query, activation and delete of a travelEntitlement.
+- travelEntitlementId for identifying single travel entitlement in a reservation.
+- TravelEntitlement defenition as response for status and activation of a travelEntitlement.
+- chosenAccessibilityReservationIds to ReservationRequest to indicate reservevation
+  for accessibility features.
+- AccessibilityReservation definition with accessibilityReservationId for
+  required accessibility feature reservation.
+
+### Removed
+- reservationData field, replaced by travelEntitlementId. Use shorter ID for
+  travelEntitlement endpoint instead of data field that could be a alot longer.  
+- In AvailabilityRequest the unneeded fields from extraService and accessibility feature
+  requirements: it is redundant that client side sends fare information. Titles/identifiers
+  are only needed. Added AccessibilityBase and ExtraServicesBase.
 
 ## [0.2.0] - 6.10.2017
 ### Added
