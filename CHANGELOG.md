@@ -5,6 +5,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 ### Added
+- new accessibility features to have compatability with National Access Point.
 - ticketType as a metadata for different ticket formats. Can be used to distinguish
   different ticket formats from each other.
 - travelEntitlement endpoint for status query, activation and delete of a travelEntitlement.
