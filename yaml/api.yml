@@ -743,6 +743,11 @@ definitions:
         description: "Contract identifier"
       travel:
         $ref: "#/definitions/Travel"
+      supportedTicketTypes:
+        type: array
+        description: "List of ticket types the trasport service supports. For example QR code, barcode, NFC."
+        items:
+          type: string
       availability:
         type: array
         items:
@@ -819,6 +824,10 @@ definitions:
             travelEntitlementId:
               type: string
               description: "The id for a travel entitlement from availability response."
+            ticketType:
+              type: string
+              description: "Requested type of the ticket. Must be one of the types the transport service \
+                            supports."
             customerInfo:
               type: array
               items:
@@ -830,7 +839,7 @@ definitions:
                 type: string
             chosenAccessibilityReservationIds:
               type: array
-              description: "Reservation ids of chosen accessibility features, th."
+              description: "Reservation ids of chosen accessibility features."
               items:
                 type: string
     example:
@@ -861,7 +870,12 @@ definitions:
               description: "The id for the travel entitlement."
             ticketPayload:
               type: string
-              description: "Ticket payload. Format is agreed by API partners."
+              description: "Ticket payload. Format is agreed by API partners, ticketType can be used to distinguish \
+                            different formats."
+            ticketType:
+              type: string
+              description: "The ticket type for the ticket payload, for example NFC, QR code, Barcode or Bluetooth. \
+                            Different formats is agreed by API partners."
             validFrom:
               type: string
               format: "date-time"
@@ -1100,6 +1114,10 @@ definitions:
       ticketPayload:
         type: string
         description: "Ticket payload. Format is agreed by API partners."
+      ticketType:
+        type: string
+        description: "The ticket type for the ticket payload, for example NFC, QR code, Barcode or Bluetooth. \
+                      Different formats is agreed by API partners."
       validFrom:
         type: string
         format: "date-time"

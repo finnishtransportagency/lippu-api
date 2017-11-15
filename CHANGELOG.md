@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 ### Added
+- ticketType as a metadata for different ticket formats. Can be used to distinguish
+  different ticket formats from each other.
 - travelEntitlement endpoint for status query, activation and delete of a travelEntitlement.
 - travelEntitlementId for identifying single travel entitlement in a reservation.
 - TravelEntitlement defenition as response for status and activation of a travelEntitlement.
