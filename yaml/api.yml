@@ -61,10 +61,15 @@ paths:
           description: "Company account does not exists or valid authentication token could not be generated."
           schema:
             $ref: '#/definitions/ApiError'
+          examples:
+            application/json: {"statusCode": 403, message: "Company account does not exists or valid authentication \
+                                                            token could not be generated."}
         405:
           description: "Invalid company account."
           schema:
             $ref: '#/definitions/ApiError'
+          examples:
+            application/json: {"statusCode": 405, message: "Invalid company account."}
 
   /auth/commit:
     post:
@@ -113,10 +118,14 @@ paths:
           description: "Authentication failed"
           schema:
             $ref: '#/definitions/ApiError'
+          examples:
+            application/json: {"statusCode": 403, message: "Authentication failed"}
         405:
           description: "Input error"
           schema:
             $ref: '#/definitions/ApiError'
+          examples:
+            application/json: {"statusCode": 405, message: "Input error"}
 
   /products/{date}:
     get:
@@ -216,16 +225,18 @@ paths:
           schema:
             $ref: "#/definitions/ProductQueryResponse"
         403:
-          description: "Invalid authentication token"
+          description: "Access denied or invalid authentication token."
           schema:
             $ref: '#/definitions/ApiError'
+          examples:
+            application/json: {"statusCode": 403, message: "Access denied or invalid authentication token."}
 
 
   /availability:
     post:
       tags:
       - "availability"
-      summary: "Trip availaibility inquiry"
+      summary: "Trip availability inquiry"
       description: "API to inquire trip availabilities from transport operator."
       operationId: "availability"
       consumes:
@@ -278,10 +289,11 @@ paths:
           schema:
             $ref: "#/definitions/AvailabilityResponse"
         403:
-          description: "Invalid authentication token"
+          description: "Access denied or invalid authentication token."
           schema:
             $ref: '#/definitions/ApiError'
-
+          examples:
+            application/json: {"statusCode": 403, message: "Access denied or invalid authentication token."}
 
   /reservation:
     post:
@@ -340,9 +352,11 @@ paths:
           schema:
             $ref: "#/definitions/ReservationResponse"
         403:
-          description: "Invalid authentication token"
+          description: "Access denied or invalid authentication token."
           schema:
             $ref: '#/definitions/ApiError'
+          examples:
+            application/json: {"statusCode": 403, message: "Access denied or invalid authentication token."}
 
   /reservation/{caseId}:
     delete:
@@ -395,13 +409,17 @@ paths:
           schema:
             $ref: '#/definitions/ReservationDeleteResponse'
         403:
-          description: "Case id does not exists or invalid authentication token"
+          description: "Access denied or invalid authentication token."
           schema:
             $ref: '#/definitions/ApiError'
+          examples:
+            application/json: {"statusCode": 403, message: "Access denied or invalid authentication token"}
         404:
-          description: "No valid booking with given case identifier."
+          description: "No valid booking found with given case identifier."
           schema:
             $ref: '#/definitions/ApiError'
+          examples:
+            application/json: {"statusCode": 404, message: "No valid booking found with given case identifier."}
 
 
   /travelEntitlement/{travelEntitlementId}:
@@ -455,13 +473,17 @@ paths:
           schema:
             $ref: '#/definitions/TravelEntitlement'
         403:
-          description: "Travel entitlement does not exists or invalid authentication token."
+          description: "Access denied or invalid authentication token."
           schema:
             $ref: '#/definitions/ApiError'
+          examples:
+            application/json: {"statusCode": 403, message: "Access denied or invalid authentication token."}
         404:
-          description: "No valid travel entitlement found with given id."
+          description: "No valid travel entitlement found with the given id."
           schema:
             $ref: '#/definitions/ApiError'
+          examples:
+            application/json: {"statusCode": 404, message: "No valid travel entitlement found with the given id."}
     delete:
       tags:
       - "travelEntitlement"
@@ -512,14 +534,17 @@ paths:
           schema:
             $ref: '#/definitions/ReservationDeleteResponse'
         403:
-          description: "The travelEntitlementId identifying the travel entitlement does not exists or \
-                        invalid authentication token."
+          description: "Access denied or invalid authentication token."
           schema:
             $ref: '#/definitions/ApiError'
+          examples:
+            application/json: {"statusCode": 403, message: "Access denied or invalid authentication token."}
         404:
-          description: "No valid travel entitlement found with given id."
+          description: "No valid travel entitlement found with the given id."
           schema:
             $ref: '#/definitions/ApiError'
+          examples:
+            application/json: {"statusCode": 404, message: "No valid travel entitlement found with the given id."}
 
   /travelEntitlement/{travelEntitlementId}/activate:
     post:
@@ -572,13 +597,17 @@ paths:
           schema:
             $ref: '#/definitions/TravelEntitlement'
         403:
-          description: "Travel entitlement does not exists or invalid authentication token."
+          description: "Access denied or invalid authentication token."
           schema:
             $ref: '#/definitions/ApiError'
+          examples:
+            application/json: {"statusCode": 403, message: "Access denied or invalid authentication token."}
         404:
-          description: "No valid booking with given reservation data."
+          description: "No valid travel entitlement found with the given id."
           schema:
             $ref: '#/definitions/ApiError'
+          examples:
+            application/json: {"statusCode": 404, message: "No valid travel entitlement found with the given id."}
 
 # -----------------------------------------------------
 # REQUEST AND RESPONSE DEFINITIONS
