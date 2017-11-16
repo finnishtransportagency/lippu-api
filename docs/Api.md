@@ -47,42 +47,77 @@ flow is below.
 
 ![Reservation flow sequence](uml/reservation_flow.png "Reservation flow sequence")
 
-### Product query
+### Product query (GET)
 Product query retrieves the available products from the travel transportation
 service. Client can limit the query results by date, coordinates and required
 accessibility features. The server responds with the products that satisfy
 the query parameters, its accessibility features, extra services available
 and passenger categories available for the product.
 
-### Availability query
+### Availability query (POST)
 After having the products, the client can query if the travel transportation
 service has the capacity to fulfill travel requirements. The query will have:
 * travel information, from where (coordinate or stop id), to where (coordinate or stop id)
 * travel time 
 * passenger information (passenger category, extra services, accessibility services)
-* contract
+* contract identifier
+* optional requirements for accessibility features and extra services 
 
 If the server has capasity to fulfill the travel, it will do a soft booking
 for the travel, meaning the booking is valid for a short period of time
 to complete the reservation before expiring.
-Then the server responds with the reservation data
-for the travels and how long the soft booked reservation is valid. The response also
-has the transport vehicle information. The reservation data must uniquely
-identify the travel to the travel transport service.
+Then the server responds with the case id for whote reservation,
+reservation ids for the individual travels and how long the soft
+booked reservation is valid. The individual travel information also
+has information about the accessibility requirements and extra service
+features. The response also has the transport vehicle information.
+The *travelEntitlementId* must uniquely identify the travel to the
+travel transport service and case id uniquely identify the whole reservation.
 
-### Reservation
+### Reservation (POST)
 If the customer accepts the offered booking, permanent reservation
 is made. The client sends the confirmed reservations by sending
-the reservationdata back to the server with optional customer information.
-The server responds with the ticket payloads for the reservations, which
-the client can forward to the customer.
+the reservation request to the server with optional customer information.
+The server responds with the ticket payloads and ticket type information
+for the reservations and travelEntitlement ids, which the client can
+forward to the customer/end user.
+
+## Cancellation of the reservation (DELETE)
+Client can cancel the reservation by sending *DELETE* request to
+the reservation endpoint with the case id. This will cancel every
+reserved travelEntitlement related to this reservation. To cancel
+individual travelEntitlement, see the section *Cancellation of the travel
+entitlement (DELETE)*.
+
+## Travel entitlement
+The *travelEntitlement* API endpoint is for manipulating individual
+*TravelEntitlements* after they have been reserved. There are three
+operations *travelEntitlement*: status, cancellation and activation.
+
+### Status of the travel entitlement (GET) 
+This request will return the status of the *TravelEntitlement*
+identified by *travelEntitlementId*. This includes ticket attributes,
+validity time of the *TravelEntitlement* and status of the 
+
+### Cancellation of the travel entitlement (DELETE)
+This operation will cancel the *TravelEntitlement* identified by
+*travelEntitlementId*.
+
+### Activation of the travel entitlement (POST)
+This request will activate the *travelEntitlement*
+identified by *travelEntitlementId*. This is useful when the activation
+must be done by the customer instead of a conductor or a driver
+or a machine. The request will return the *travelEntitlement*
+information after the activation or error response.
 
 ## Payment 
-Payment for tickets is outside of the scope of the project. For payment, there exists
-already options in other channels.
+Payment for tickets is outside of the scope of the project.
+For payment, there exists already options in other channels.
 
 ## Ticket format
 This specification does not dictate any format for the tickets, but
-it has field to transfer the payload. The parties can decide a suitable
-ticket format, so that the tickets can be validated by the travel transport operator.   
-
+it has field to transfer the payload and attribute to indicate
+ticket format type (attribute is *ticketType*). This way multiple
+different ticket formats are supported. The parties can decide a
+suitable ticket format, so that the tickets can be validated
+by the travel transport operator and shown by the device customer has.
