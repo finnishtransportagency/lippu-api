@@ -1,0 +1,38 @@
+@startuml
+
+
+skinparam backgroundColor #FFFFFF
+skinparam NoteBackgroundColor #FFFFFF
+skinparam NoteBorderColor blue
+skinparam sequence {
+	ArrowColor DeepSkyBlue
+	ActorBorderColor DeepSkyBlue
+	LifeLineBorderColor blue
+	LifeLineBackgroundColor #A9DCDF
+
+	ParticipantBorderColor DeepSkyBlue
+	ParticipantBackgroundColor DodgerBlue
+	ParticipantFontSize 17
+	ParticipantFontColor #FFFFFF
+
+	ActorBackgroundColor aqua
+	ActorFontColor DeepSkyBlue
+	ActorFontSize 17
+	ActorFontName Aapex
+
+}
+Client -> Server: GET /products/{date}?... (Product query)
+
+Server --> Client: HTTP 200 (ProductQueryResponse)
+note right of Client #FFFFFF:{"products": [{....}],\n  "passengerCategories": ["..."]\n}
+Client -> Server: POST /availability (AvailabilityRequest)
+note left of Server #FFFFFF: {"contract": "...",\n  "travel": {....},\n  "passengers": [{....}]\n}
+Server --> Client: HTTP 200 (AvailabilityResponse)
+note right of Client #FFFFFF:{"contract": "...",\n  "travel": {....},\n  "availability": [{....}]\n}
+...Customer decides to reserve...
+
+Client -> Server: POST /reservation (ReservationRequest)
+note left of Server #FFFFFF:{"reservations": [ {....}]\n}
+Server --> Client: HTTP 200 (ReservationResponse)
+note right of Client:{ "caseId": "...",\n   "confirmedReservations":\n    [{....}]\n}
+@enduml

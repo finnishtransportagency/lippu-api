@@ -5,5 +5,6 @@ in addition to the actual [API-definition](../yaml/api.yml).
 
 ## Table of contents
 
-1. [Code generation](Codegeneration.md)
-2. [Security considerations](Security.md)
+1. [API](Api.md)
+2. [Code generation](Codegeneration.md)
+3. [Security considerations](Security.md)

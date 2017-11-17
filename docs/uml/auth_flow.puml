@@ -1,0 +1,30 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam NoteBackgroundColor #FFFFFF
+skinparam NoteBorderColor blue
+skinparam sequence {
+	ArrowColor DeepSkyBlue
+	ActorBorderColor DeepSkyBlue
+	LifeLineBorderColor blue
+	LifeLineBackgroundColor #A9DCDF
+
+	ParticipantBorderColor DeepSkyBlue
+	ParticipantBackgroundColor DodgerBlue
+	ParticipantFontSize 17
+	ParticipantFontColor #FFFFFF
+
+	ActorBackgroundColor aqua
+	ActorFontColor DeepSkyBlue
+	ActorFontSize 17
+	ActorFontName Aapex
+}
+Client -> Server: POST /auth/init (AuthenticationInitRequest)
+note left of Server #FFFFFF: {"account": "..."}
+Server --> Client: HTTP 200: AuthenticationInitResponse
+note right of Client #FFFFFF:{"snonce": "...",\n  "user": "...",\n  "expires" : "..."}
+
+Client -> Server: POST /auth/commit (AuthenticationRequest)
+note left of Server #FFFFFF: {"data": "...",\n  "cnonce": "...",\n  "snonce": "...",\n  "alg": "...",\n  "pubKeyId": "..."}
+Server --> Client: HTTP 200 AuthenticationResponse
+note right of Client #FFFFFF: {"token": "...",\n  "user": "...",\n  "expires": "..."}
+@enduml
