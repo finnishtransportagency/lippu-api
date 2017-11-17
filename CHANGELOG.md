@@ -3,7 +3,7 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased]
+## [0.3.0] - 17.11.2017
 ### Added
 - ticketType as a metadata for different ticket formats. Can be used to distinguish
   different ticket formats from each other.
@@ -14,6 +14,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
   for accessibility features.
 - AccessibilityReservation definition with accessibilityReservationId for
   required accessibility feature reservation.
+- Separate document for API.
+- Examples for all of the response error cases.
 
 ### Removed
 - reservationData field, replaced by travelEntitlementId. Use shorter ID for
