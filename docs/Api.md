@@ -121,3 +121,18 @@ ticket format type (attribute is *ticketType*). This way multiple
 different ticket formats are supported. The parties can decide a
 suitable ticket format, so that the tickets can be validated
 by the travel transport operator and shown by the device customer has.
+
+## Accessibility and extra services
+The API has attribute, type of a enumareted list, to describe
+which accessibility features transport service's
+products support. In addition to the enumarated list,
+descriptions can be attached to them. At the minunum
+tranport service should use the **UNKNOWN** value
+to let users know that information in unavailable.
+The list of the accessibility features was retrieved
+from National Access Point (NAP) definitions
+(a project by Finnish Transport Agency).
+
+Transport service can also support variable extra services.
+These have not been formally defined, implementors can
+describe relevant extra services they support.
