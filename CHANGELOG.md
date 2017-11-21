@@ -3,9 +3,12 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## [0.3.0] - 17.11.2017
+## [Unreleased]
 ### Added
 - new accessibility features to have compatability with National Access Point.
+
+## [0.3.0] - 17.11.2017
+### Added
 - ticketType as a metadata for different ticket formats. Can be used to distinguish
   different ticket formats from each other.
 - travelEntitlement endpoint for status query, activation and delete of a travelEntitlement.
