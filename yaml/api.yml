@@ -217,6 +217,15 @@ paths:
               - BOARDING_ASSISTANCE
               - UNACCOMPANIED_MINOR_ASSISTANCE
               - STEP_FREE_ACCESS
+              - WALKINGSTICK
+              - AUDIO_NAVIGATOR
+              - VISUAL_NAVIGATOR
+              - UMBRELLA
+              - BUGGY
+              - SUITABLE_FOR_WHEELCHAIRS
+              - SUITABLE_FOR_HEAVILY_DISABLED
+              - TACTILE_PLATFORM_EDGES
+              - TACTILE_GUIDING_STRIPS
           description: List of required accessibility options for the product.
 
       responses:
@@ -1186,6 +1195,15 @@ definitions:
           - UNACCOMPANIED_MINOR_ASSISTANCE
           - OTHER
           - STEP_FREE_ACCESS
+          - WALKINGSTICK
+          - AUDIO_NAVIGATOR
+          - VISUAL_NAVIGATOR
+          - UMBRELLA
+          - BUGGY
+          - SUITABLE_FOR_WHEELCHAIRS
+          - SUITABLE_FOR_HEAVILY_DISABLED
+          - TACTILE_PLATFORM_EDGES
+          - TACTILE_GUIDING_STRIPS
           - UNKNOWN
 
   Accessibility:
