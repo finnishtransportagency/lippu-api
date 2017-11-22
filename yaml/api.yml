@@ -131,11 +131,10 @@ paths:
     get:
       tags:
       - "availability"
-      summary: "Product portfolio for given datetime."
-      description: "Returns product portfolio of transport operator that is valid on given datetime.\
+      summary: "Product portfolio for given date."
+      description: "Returns product portfolio of transport operator that is valid on given date.\
                     As product offerings can change over time, and some products may be seasonal, \
-                    the date is always part of the search process. If the search parameter {date} \
-                    is left unchecked, then the time of the query is assumed as a time."
+                    the date is always part of the search process."
       operationId: "products"
       produces:
         - "application/json"
@@ -166,11 +165,11 @@ paths:
           description: "JWT authentication token for authorization requests."
 
         - in: path
-          name: date
-          description: "Datetime value when returned product portfolio is valid. If date is not given, current datetime is used."
-          required: true
           type: string
-          format: "date-time"
+          format: "date"
+          required: true
+          name: date
+          description: "Date value when returned product portfolio is valid."
 
         - in: query
           name: fromLat
@@ -744,7 +743,7 @@ definitions:
         type: string
         description: "Contract identifier"
       travel:
-        $ref: "#/definitions/Travel"
+        $ref: "#/definitions/TravelRequest"
       passengers:
         type: array
         items:
@@ -753,7 +752,7 @@ definitions:
       - contract: "CONTRACT-AB123CD"
         travel:
           productType: "PRODUCT-SINGLE-TICKET"
-          dateTime: "2017-08-23T07:20:04.474Z"
+          departureTimeEarliest: "2017-08-23T07:20:04.474Z"
           from:
             lat: 60.2
             lon: 24.8
@@ -780,7 +779,7 @@ definitions:
         type: string
         description: "Contract identifier"
       travel:
-        $ref: "#/definitions/Travel"
+        $ref: "#/definitions/TravelResponse"
       supportedTicketTypes:
         type: array
         description: "List of ticket types the trasport service supports. For example QR code, barcode, NFC."
@@ -794,7 +793,7 @@ definitions:
       - contract: "CONTRACT-AB123CD"
         travel:
           productType: "PRODUCT-SINGLE-TICKET"
-          dateTime: "2017-08-23T07:20:04.474Z"
+          departureTime: "2017-08-23T07:20:04.474Z"
           from:
             lat: 60.2
             lon: 24.8
@@ -1270,21 +1269,16 @@ definitions:
         properties:
           extraServiceReservationId:
             type: string
+            description: "Reservation id for the extra service."
 
   Travel:
     type: object
     required:
       - productType
-      - dateTime
     properties:
       productType:
         type: string
         description: "Availability/Product identifier from the products query response."
-      dateTime:
-          type: string
-          format: "date-time"
-          description: "Datetime when transport service will or when customer wants to depart. This depends whether
-                        transport service is public transport or Demand Response Transport (DRT) service."
       serviceId:
         type: string
         description: "Identifier for specific transport operator service. With this value requestor can prefer
@@ -1293,6 +1287,44 @@ definitions:
         $ref: '#/definitions/CombinedLocation'
       to:
         $ref: '#/definitions/CombinedLocation'
+
+  TravelRequest:
+    title: TravelRequest
+    type: object
+    description: "Travel request."
+    allOf:
+      - $ref: '#/definitions/Travel'
+      - type: object
+        properties:
+          departureTimeEarliest:
+            type: string
+            format: "date-time"
+            description: "The earliest datetime when customer wants to depart. If both, \
+                          departureTimeEarliest and arrivalTimeLatest are submitted the departureTimeEarliest
+                          is used. If neither is submitted, the current datetime is used as departureTimeEarliest."
+          arrivalTimeLatest:
+            type: string
+            format: "date-time"
+            description: "The latest datetime when customer wants to arrive to the destination. If both, \
+                          departureTimeEarliest and arrivalTimeLatest are submitted the departureTimeEarliest
+                          is used. If neither is submitted, the current datetime is used as departureTimeEarliest."
+
+  TravelResponse:
+    title: TravelResponse
+    type: object
+    description: "Travel response."
+    allOf:
+      - $ref: '#/definitions/Travel'
+      - type: object
+        properties:
+          departureTime:
+            type: string
+            format: "date-time"
+            description: "The datetime for the transportation departure."
+          arrivalTime:
+            type: string
+            format: "date-time"
+            description: "The datetime for the transportation arrival to the destination."
 
   Location:
     title: Location
