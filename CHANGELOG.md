@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 ### Added
 - new accessibility features to have compatability with National Access Point.
+- section about header parameters to api document.
+
+### Changed
+- improve X-Transaction-Id descriptions.
 
 ## [0.3.0] - 17.11.2017
 ### Added
