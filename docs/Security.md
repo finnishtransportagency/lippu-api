@@ -16,7 +16,7 @@ Finnish at Github: [Uhka-analyysi](https://github.com/solita/uhka-analyysi).
 It is suggested to incorporate threat modelling practises into
 the software development process.
 
-## Layered security architecture
+## Layered security architecture and firewall considerations
 Layered security architecture, sometimes
 referred as *onion model*, is a commonly used
 security architecture style to build software
@@ -29,13 +29,15 @@ must penatrate all of the outer layers before getting access
 to the most critical informatation. It is suggested
 to use layered security architecture when designing
 the software systems implementing the Lippu-API.
+It is also suggested to allow only required network connections
+in firewall policy and set the default policy to deny.
 
-## HTTP considerations
+## HTTP
 The Lippu-API is built on top of HTTP-protocol, all
 the security considerations of the HTTP-protocol
 as defined in the [section-9](https://tools.ietf.org/html/rfc7230#section-9)
 of the [Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and Routing](https://tools.ietf.org/html/rfc7230)
--standard and the related specifications are relevant also for the Lippu-API.
+-standard and the related specifications are relevant also for the Lippu-API.  
 
 ## TLS considerations
 All traffic between the client and the server must be
@@ -43,8 +45,10 @@ encrypted. The server side must support TLS 1.2
 ([RFC5246](https://tools.ietf.org/html/rfc5246)) encryption
 and may support additional transport-layer mechanisms.
 Client side should perform a TLS/SSL server identity
-check when using encrypted TLS connection. The implementors
-should also consider using client-side certification
+check when using encrypted TLS connection. When the
+client application is not a private individual, but an
+organisational user, the implementors should
+seriously consider using client-side certification
 authentication to do TLS-level authentication.
 Additional information can be found on [RFC6125](https://tools.ietf.org/html/rfc6125)
 and [RFC7525](https://tools.ietf.org/html/rfc7525) 
