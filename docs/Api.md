@@ -83,7 +83,7 @@ and passenger categories available for the product.
 After having the products, the client can query if the travel transportation
 service has the capacity to fulfill travel requirements. The query will have:
 * travel information, from where (coordinate or stop id), to where (coordinate or stop id)
-* travel time 
+* departureTimeEarliest and arrivalTimeLatest to indicate travel time
 * passenger information (passenger category, extra services, accessibility services)
 * contract identifier
 * optional requirements for accessibility features and extra services 
@@ -91,7 +91,7 @@ service has the capacity to fulfill travel requirements. The query will have:
 If the server has capasity to fulfill the travel, it will do a soft booking
 for the travel, meaning the booking is valid for a short period of time
 to complete the reservation before expiring.
-Then the server responds with the case id for whote reservation,
+Then the server responds with the case id for the whole reservation,
 reservation ids for the individual travels and how long the soft
 booked reservation is valid. The individual travel information also
 has information about the accessibility requirements and extra service

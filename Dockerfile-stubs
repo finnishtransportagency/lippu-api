@@ -1,6 +1,6 @@
 FROM openjdk:8-jdk-alpine
 
-RUN apk add --update maven wget
+RUN apk add --update maven wget xmlstarlet
 
 RUN mkdir /codegen
 RUN mkdir /stubs
