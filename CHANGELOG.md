@@ -3,17 +3,21 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
-## [Unreleased]
+## [1.0.0] - 24.11.2017
 ### Added
 - new accessibility features to have compatability with National Access Point.
 - section about header parameters to api document.
 - introduction document.
 
 ### Changed
-- improve X-Transaction-Id descriptions.
+- improve X-Transaction-Id descriptions [#2](https://github.com/finnishtransportagency/lippu-api/issues/2).
 - improve Security considerations document.
-- improve API documentation, add section about accessibility.
+- improve API documentation, add section about accessibility
   and extra services.
+- replace dateTime with departureTimeEarliest and arrivalTimeLatest
+  in AvailabilityRequest and departureTime and arrivalTime in
+  AvailabilityResponse. Add TravelRequest and TravelResponse definitions
+  to extend Travel definition [#6](https://github.com/finnishtransportagency/lippu-api/issues/6).
 
 ## [0.3.0] - 17.11.2017
 ### Added
