@@ -32,7 +32,7 @@ the software systems implementing the Lippu-API.
 It is also suggested to allow only required network connections
 in firewall policy and set the default policy to deny.
 
-## HTTP
+## HTTP considerations
 The Lippu-API is built on top of HTTP-protocol, all
 the security considerations of the HTTP-protocol
 as defined in the [section-9](https://tools.ietf.org/html/rfc7230#section-9)
